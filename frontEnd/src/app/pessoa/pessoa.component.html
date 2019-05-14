@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="col-12 col-centered">
+      <div class="row">
+        
+          <div class="col-3">      
+                    <input type="text" minlength="4" class="form-control form-control-sm float-right" [(ngModel)]="filter.nome" (keyup.enter)="search()" placeholder="Pesquise Pessoas por nome">                       
+          </div>
+          <div class="col-2">
+            <button type="button" class="btn btn-outline-success btn-sm float-left" (click)="search()">Pesquisar</button>
+        </div>
+           
+           
+      </div> <br>
+      
+    <div class="row">
+    <div class="card-columns">
+      <div class="card bg-light text-black" (click)="goDetail(pessoa)" *ngFor="let pessoa of pessoas">
+        <div *ngIf="pessoa.profile_path != null">
+            <img class="card-img-bottom"
+            src="https://image.tmdb.org/t/p/w250_and_h141_face{{ pessoa.profile_path }}" alt="_blank" />
+        </div>  
+        <div *ngIf="pessoa.profile_path == null">
+            <img src="./../../assets/PersonDefault.jpeg" class="card-img-bottom" alt="_blank" />
+        </div>
+       <div class="card-body"> 
+          <h6 class="card-title">{{pessoa.name}}</h6>
+       </div>
+         
+      </div>
+    </div>
+    </div>
+
+    <ngb-pagination class="d-flex justify-content-center"  [collectionSize]="totalElements" 
+    [(page)]="page" (pageChange)="pageChanged($event)" [pageSize]="size" [maxSize]="5" [rotate]="true"
+     [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+
+  </div>
+</div>

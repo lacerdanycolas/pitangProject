@@ -1,0 +1,76 @@
+
+<div class="container">
+<div class="row">
+  <div class="col-12 col-md-4">
+    <div class="card">
+      <img class="card-img" src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{ movie.backdrop_path }}" alt="">
+    </div>
+  </div>
+  &nbsp;
+  <div class="col-12 col-md-7">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          
+           <!--Modal-->
+           <ng-template #content let-modal>
+              <div class="modal-header">
+                <h3 class="modal-title" id="modal-basic-title">Deletar Filme</h3>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <h4 style="font-family: 'Times New Roman', Times, serif;">Você deseja realmente deletar o Filme?</h4>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="deleteMovie()">Sim</button>
+                <button type="button" class="btn btn-outline-danger" (click)="modal.close('Save click')">Cancelar</button>
+              </div>
+            </ng-template>
+          
+          <div class="col">
+              <h5 class="card-title">{{ movie?.title }} ({{ movie?.release_date | date: 'yyyy'}})</h5> &nbsp;
+          </div>
+          <div class="col-4">
+            <a [routerLink]="['/editar', movie.id]"><span class="btn btn-primary btn-sm float-right">Editar</span></a>
+            <button type="button" class="btn btn-danger btn-sm" (click)="open(content)">Deletar</button>   
+            
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-title text-justify"><strong>Sinopse:</strong>&nbsp; {{ movie?.overview }}</p>
+        <p class="card-title text-justify"><strong>Língua:</strong>&nbsp; {{movie?.original_language}}</p>
+        <p class="card-title text-justify"><strong>Data Lançamento:</strong>&nbsp;{{movie?.release_date | date:'shortDate'['pt-BR']}}</p>
+        <p class="card-title text-justify"><strong>Duração:</strong>&nbsp;{{movie?.runtime}} min </p>
+
+        <p><strong>Gêneros:</strong> </p>
+        <div class="d-inline-block" *ngFor="let genre of genreMovies">
+            <span class="badge badge-pill badge-primary">{{ genre?.name }}</span> &nbsp;
+        </div>
+        <br/>  <br/>
+        <p><strong>Elenco:</strong> </p>
+        <ngb-carousel >
+            <ng-template *ngFor="let person of castPerson;" ngbSlide>
+              <img class="d-block w-100" src="https://image.tmdb.org/t/p/w250_and_h141_face{{person.profile_path}}" >
+              <div class="carousel-caption">
+                <h5 style="color:yellow; font-family: 'Times New Roman', Times, serif;">{{person.name}}</h5>
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        
+      </div>
+    </div>
+  </div>
+
+  
+
+
+</div>
+
+
+
+</div>

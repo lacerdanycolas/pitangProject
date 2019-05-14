@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="col-12 col-centered">
+        <div class="row">
+            <div class="col-3">      
+                        <input type="text" minlength="4" class="form-control form-control-sm" [(ngModel)]="filter.nome" (keyup.enter)="search()" placeholder="Pesquise séries por nome">                       
+            </div>
+              <div class="col-3 ">
+                          <input type="number" minlength="4" class="form-control form-control-sm" [(ngModel)]="filter.ano" (keyup.enter)="search()" placeholder="Pesquise séries por ano">   
+              </div>
+              <div class="col-3">   
+                      <input  type="text" minlength="2" class="form-control form-control-sm" [(ngModel)]="filter.lingua" (keyup.enter)="search()" placeholder="Pesquise séries por língua">     
+              </div> 
+              <div class="col-2">
+                  <button type="button" class="btn btn-outline-success btn-sm" (click)="search()">Pesquisar</button>
+              </div>
+              
+              
+        </div> <br>
+        
+      <div class="row">
+      <div class="card-columns">
+        <div class="card bg-light text-black" (click)="goDetail(serie)" *ngFor="let serie of series">
+          <div *ngIf="serie.backdrop_path != null">
+              <img class="card-img-bottom"
+              src="https://image.tmdb.org/t/p/w250_and_h141_face{{ serie.backdrop_path }}" alt="_blank" />
+          </div>  
+          <div *ngIf="serie.backdrop_path == null">
+              <img class="card-img-bottom" width="250" height="141"
+              src="https://media.comicbook.com/files/img/default-movie.png" alt="_blank" />
+          </div>
+         <div class="card-body"> 
+            <h6 class="card-title">{{serie.name}} ({{serie.first_air_date | date:'yyyy'}})</h6>
+         </div>
+           
+        </div>
+      </div>
+      </div>
+     
+      <div class="row">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+          <div  *ngFor="let page of pages">
+            <li class="page-item"><a class="page-link" (click)="getSeries(page.index)" >{{page.index}}</a></li>
+          </div>
+        </ul>
+      </nav>
+      </div>
+     
+    
+    </div>
+    </div>
