@@ -1,0 +1,14 @@
+<persistence-unit name="livraria" transaction-type ="RESOURCE_LOCAL">
+  <provider>org.hibernate.ejb.HibernatePersistence</provider>
+  <class>br.com.k19.modelo.Editora</class>
+  <properties>
+    <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+    <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+    <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+    <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:D:/Documentos/PitangProject/database/database.db;shutdown=true;hsqldb.write_delay_millis=0;"/>
+    <property name="javax.persistence.jdbc.user" value="sa "/>
+    <property name="javax.persistence.jdbc.password" value=""/>
+
+  </properties>
+</persistence-unit>
