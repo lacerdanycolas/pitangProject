@@ -1,11 +1,13 @@
 package com.pitang.projectPitang.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pitang.projectPitang.models.Person;
 import com.pitang.projectPitang.utils.Gender;
 import jdk.nashorn.internal.objects.annotations.Getter;
 
 import javax.persistence.Enumerated;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PersonEntityDTO {
 
   private String name;
@@ -14,7 +16,7 @@ public class PersonEntityDTO {
   private Gender gender;
 
   public Person transformaParaObjeto(){
-    return new Person(name,gender,place_of_birth);
+    return new Person(name,gender,place_of_birth,profile_path);
   }
 
   public String getName() {

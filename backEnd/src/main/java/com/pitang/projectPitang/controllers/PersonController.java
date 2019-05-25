@@ -41,6 +41,7 @@ public class PersonController {
                                           @RequestParam(required = false) String name){
 
     Specification<Person> specification = PersonSpecification.searchPerson(name);
+
     Page<Person> pagePerson = this.personRepository.findAll(Specification.where(specification),pageable);
     return new ResponseEntity<>(pagePerson, HttpStatus.OK);
 
@@ -51,7 +52,7 @@ public class PersonController {
     return new ResponseEntity<>(this.personRepository.findById(id).get(),HttpStatus.OK);
   }
 
-  @RequestMapping(method = RequestMethod.POST)
+  @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @Transactional(rollbackFor = Exception.class)
   public ResponseEntity<?> createPerson(@Valid @RequestBody PersonEntityDTO personEntityDTO){
     Person person = this.personRepository.save(personEntityDTO.transformaParaObjeto());

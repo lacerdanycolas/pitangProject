@@ -50,10 +50,11 @@ public class Person {
 
   }
 
-  public Person(String name, Gender gender, String place_of_birth) {
+  public Person(String name, Gender gender, String place_of_birth,String profile_path) {
     this.name = name;
     this.gender = gender;
     this.place_of_birth = place_of_birth;
+    this.profile_path = profile_path;
   }
 
   @Override

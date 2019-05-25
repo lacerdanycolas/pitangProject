@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -76,6 +77,12 @@ public class TvSerieController {
   public ResponseEntity<?> getCastTv(@PathVariable Integer id){
     Optional<CastTv> castTv = this.castTvService.getCast(id);
     return new ResponseEntity<>(castTv,HttpStatus.OK);
+  }
+
+  @RequestMapping(value="/{id}/cast", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> createCastMovie(@Valid @RequestBody CastTv cast, @PathVariable Integer id){
+    CastTv returnCast = this.castTvService.saveCastTv(cast,id,cast.getPersons());
+    return new ResponseEntity<>(returnCast,HttpStatus.CREATED);
   }
 
   @PostMapping()

@@ -1,11 +1,14 @@
 package com.pitang.projectPitang.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.JoinColumn;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MovieEntityDTO {
 
   private String title;

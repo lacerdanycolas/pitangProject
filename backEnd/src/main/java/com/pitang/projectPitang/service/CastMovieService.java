@@ -33,7 +33,7 @@ public class CastMovieService {
     return cast;
   }
 
-  public void saveCast(Cast cast, Integer id, List<Person> listPerson){
+  public Cast saveCast(Cast cast, Integer id, List<Person> listPerson){
     List<Person> listResult = new ArrayList<>();
     for(Person person: listPerson){
       List<Cast> listCast = person.getCast();
@@ -50,6 +50,8 @@ public class CastMovieService {
     Optional<Movie> movie = this.movieRepository.findById(id);
     movie.get().setCast(cast);
     this.movieRepository.save(movie.get());
+
+    return cast;
 
   }
 

@@ -112,8 +112,8 @@ public class MovieController {
 
   @RequestMapping(value="/{id}/cast", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> createCastMovie(@Valid @RequestBody Cast cast, @PathVariable Integer id){
-    this.castMovieService.saveCast(cast,id,cast.getPersons());
-      return new ResponseEntity<>(HttpStatus.CREATED);
+    Cast returnCast = this.castMovieService.saveCast(cast,id,cast.getPersons());
+      return new ResponseEntity<>(returnCast,HttpStatus.CREATED);
   }
 
 

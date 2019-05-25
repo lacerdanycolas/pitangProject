@@ -1,7 +1,10 @@
 package com.pitang.projectPitang.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TvSerieEntityDTO {
 
   private String name;

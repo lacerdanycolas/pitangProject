@@ -2,10 +2,10 @@ package com.pitang.projectPitang.service;
 
 
 import com.pitang.projectPitang.models.CastTv;
+import com.pitang.projectPitang.models.Movie;
 import com.pitang.projectPitang.models.Person;
-import com.pitang.projectPitang.repository.CastRepository;
-import com.pitang.projectPitang.repository.CastTvRepository;
-import com.pitang.projectPitang.repository.PersonRepository;
+import com.pitang.projectPitang.models.TvSerie;
+import com.pitang.projectPitang.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,9 @@ public class CastTvService {
 
   @Autowired
   private PersonRepository personRepository;
+
+  @Autowired
+  private TvSerieRepository tvSerieRepository;
 
   public Optional<CastTv> getCast(Integer id){
     Optional<CastTv> castTv = this.castTvRepository.findById(id);
@@ -43,6 +46,29 @@ public class CastTvService {
     }catch(Exception e){
 
     }
+
+  }
+
+  public CastTv saveCastTv(CastTv cast, Integer id, List<Person> listPerson){
+    List<Person> listResult = new ArrayList<>();
+    for(Person person: listPerson){
+      List<CastTv> listCast = person.getCastTv();
+
+      if(listCast == null){
+        listCast = new ArrayList<>();
+      }
+
+      listCast.add(cast);
+      person.setCastTv(listCast);
+      listResult.add(person);
+    }
+    this.personRepository.saveAll(listResult);
+
+    Optional<TvSerie> tvSerie = this.tvSerieRepository.findById(id);
+    tvSerie.get().setCast(cast);
+    this.tvSerieRepository.save(tvSerie.get());
+
+    return cast;
 
   }
 
